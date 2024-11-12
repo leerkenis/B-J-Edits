@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="firebaseauth.js">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>B|J|Edits Sign Up</title>
+    <style>
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Body Styling */
+        body {
+            background-color: #121212;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            color: #f0f0f0;
+        }
+
+        /* Sign Up Container */
+        .signup-container {
+            background-color: #1e1e1e;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        /* Brand Logo */
+        .logo {
+            font-size: 2rem;
+            color: #00adb5;
+            margin-bottom: 30px;
+            letter-spacing: 3px;
+            font-weight: bold;
+        }
+
+        /* Form Styling */
+        .signup-form input {
+            width: 100%;
+            padding: 12px;
+            margin: 15px 0;
+            background-color: #2e2e2e;
+            border: none;
+            border-radius: 8px;
+            color: #f0f0f0;
+            font-size: 1rem;
+        }
+
+        /* Button Styling */
+        .signup-form button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background-color: #00adb5;
+            color: #fff;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .signup-form button:hover {
+            background-color: #007d84;
+        }
+
+        /* Footer Link */
+        .signup-footer {
+            margin-top: 20px;
+        }
+
+        .signup-footer a {
+            color: #00adb5;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .signup-footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="signup-container">
+        <div class="logo">B|J|Edits</div>
+        <form class="signup-form">
+            <input type="text" placeholder="Username" required>
+            <input type="email" placeholder="Email" required>
+            <input type="password" placeholder="Password" required>
+            <input type="password" placeholder="Confirm Password" required>
+            <button type="submit">Sign Up</button>
+        </form>
+        <div class="signup-footer">
+            <a href="login.html">Already have an account? Login</a>
+        </div>
+    </div>
+    <script type="module">
+        // Import Firebase SDK
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyC8tF0tyQ8Z1g2sMrDvk3uq3uvVK1ylAsE",
+            authDomain: "https://bijledits.web.app/",
+            projectId: "bijledits",
+            storageBucket: "YOUR_STORAGE_BUCKET",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "1:558075309542:web:bdf7124653fe31fd42fa27"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // Handle Sign-Up
+        async function handleSignUp(event) {
+            event.preventDefault();
+            const email = event.target.email.value;
+            const password = event.target.password.value;
+
+            try {
+                await createUserWithEmailAndPassword(auth, email, password);
+                alert("Sign-up successful!");
+                window.location.href = "home.html";  // Redirect to home page
+            } catch (error) {
+                console.error("Error signing up:", error.message);
+                alert(`Sign-up failed: ${error.message}`);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelector('.signup-form').addEventListener('submit', handleSignUp);
+        });
+    </script>
+
+</body>
+</html>
+
